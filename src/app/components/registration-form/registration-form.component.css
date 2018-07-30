@@ -1,0 +1,32 @@
+.card {
+    text-align: center;
+    max-width: 100%;
+    margin: 0px 0px 10px 0px;
+    display: block;
+}
+.form {
+    max-width: 50%;
+    margin: auto;
+    padding: 4%;
+}
+.full-width {
+    width: 100%;
+    display: block;
+}
+.gender-width {
+    max-width: 100%;
+    margin-left: 10%;
+    display: block;
+}
+.dob-width {
+    max-width: 100%;
+}
+.skil {
+    display: block;
+    margin-left: 15%;
+    position: relative;      
+}
+.first {
+    text-align:right;
+}
+

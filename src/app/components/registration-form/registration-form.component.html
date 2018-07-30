@@ -1,0 +1,138 @@
+<mat-card class="card">
+    <mat-card-title>Registraion Form</mat-card-title>
+    <p class="first"> Welcome {{firstName }}</p>
+</mat-card>
+
+<!-- Registration form is start here -->
+<mat-card class="form">
+    <form [formGroup]="regForm">
+        <!-- First Name --> 
+        <mat-form-field class="full-width">
+            <input matInput placeholder="First Name"
+                            type="text"
+                            formControlName="firstName"
+                            [(ngModel)]="firstName"
+                            >
+            <mat-error *ngFor="let validation of validation_messages.firstName">
+                <mat-error *ngIf="regForm.get('firstName').hasError(validation.type) && 
+                                  (regForm.get('firstName').dirty || regForm.get('firstName').touched)">
+                                  {{validation.message}}
+                </mat-error>
+            </mat-error>
+        </mat-form-field>
+        <!-- Last Name --> 
+        <mat-form-field class="full-width">
+            <input matInput placeholder="Last Name"
+                            type="text"
+                            formControlName="lastName"
+                            >
+        </mat-form-field>
+        <!-- Gender --> 
+        <mat-radio-group >Gender:
+            <mat-radio-button *ngFor="let gender of genders"
+                              [value]="gender"
+                              class="gender-width" required>
+                              {{ gender }}
+            </mat-radio-button>
+            <mat-error *ngFor="let validation of validation_messages.gender">
+                <mat-error *ngIf="(regForm.get('gender').hasError(validation.type))&&
+                            (regForm.get('gender').dirty || regForm.get('gender').touched) ">
+                    {{validation.message}}
+                </mat-error>
+            </mat-error>
+        </mat-radio-group>
+        <!-- Date of Birth--> 
+        <mat-form-field class="dob-width">
+            <input matInput [min]="minDate"
+                            [max]="maxDate"
+                            [matDatepicker]="picker"
+                            placeholder="Date of Birth"
+                            formControlName="dob">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngFor="let validation of validation_messages.dob">
+                <mat-error *ngIf="(regForm.get('dob').hasError(validation.type))&&(regForm.get('dob').dirty || regForm.get('dob').touched) ">
+                    {{validation.message}}
+                </mat-error>
+            </mat-error>
+        </mat-form-field>
+        <!-- Address--> 
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Address</mat-label>
+            <input matInput formControlName="address">
+            <mat-error *ngFor="let validation of validation_messages.address" >
+                <mat-error *ngIf="(regForm.get('address').hasError(validation.type))&&
+                (regForm.get('address').touched || regForm.get('address').dirty)">
+                    {{validation.message}}
+                </mat-error>
+            </mat-error>
+        </mat-form-field>
+       <!-- Mobile Number -->
+       <mat-form-field class="full-width">
+            <input type="text" matInput placeholder="Mobile No" formControlName="cell">
+            <mat-error *ngFor="let validation of validation_messages.cell">
+                <mat-error *ngIf =  "(regForm.get('cell').hasError(validation.type))&&
+                                    (regForm.get('cell').touched || regForm.get('cell').dirty)">
+                                    {{validation.message}}
+                </mat-error>
+            </mat-error>
+        </mat-form-field>
+        <!-- Email--> 
+        <mat-form-field class="full-width">
+            <input matInput type="text"
+                            placeholder="Email"
+                            formControlName="email"
+                            >
+            <mat-error *ngFor="let validation of validation_messages.email">
+              <mat-error *ngIf="regForm.get('email').hasError(validation.type) && (regForm.get('email').dirty || regForm.get('email').touched)">{{validation.message}}</mat-error>
+            </mat-error>
+        </mat-form-field>
+        <!-- Password--> 
+        <mat-form-field class="full-width">
+            <input matInput type="password" placeholder="Password" formControlName="password">
+            <mat-error *ngFor="let validation of validation_messages.password">
+              <mat-error *ngIf="regForm.get('password').hasError(validation.type) && (regForm.get('password').dirty || regForm.get('password').touched)">{{validation.message}}</mat-error>
+            </mat-error>
+        </mat-form-field>
+        <!-- Conform Password--> 
+        <mat-form-field class="full-width">
+            <input matInput type="password" placeholder="Conform Password" formControlName="cpassword">
+            <mat-error *ngFor="let validation of validation_messages.cpassword">
+                <mat-error *ngIf="regForm.get('cpassword').hasError(validation.type) && 
+                (regForm.get('cpassword').dirty || regForm.get('cpassword').touched)">{{validation.message}}</mat-error>
+            </mat-error>
+        </mat-form-field>
+        <!-- Departments --> 
+        <mat-form-field class="full-width">
+            <mat-select placeholder="Departments">
+              <mat-option   [value]="department"
+                            *ngFor="let department of departments">
+                {{ department }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngFor="let validation of validation_messages.department">
+                <mat-error *ngIf="(regForm.get('department').hasError(validation.type))&&
+                            (regForm.get('department').dirty || regForm.get('department').touched) ">
+                    {{validation.message}}
+                </mat-error>
+            </mat-error>
+        </mat-form-field>
+        <!-- Technical skills -->
+        <div>Technical skills:
+            <mat-checkbox   *ngFor="let skill of skills"
+                            class="skil">
+                            {{ skill }}
+            </mat-checkbox>
+        </div>
+        <!-- Submit Button -->
+        <button mat-raised-button   color="primary"
+                                    type="submit"
+                                    [disabled]="!regForm.valid">
+            Sumbit 
+        </button>
+        <button mat-raised-button   color="warn"
+                                    (click)="reset()">
+                                    Clear
+        </button>
+    </form>
+</mat-card>
